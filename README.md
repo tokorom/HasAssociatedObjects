@@ -70,6 +70,40 @@ let storedValue = subject.associatedObjects.value as? Int
 XCTAssertEqual(10, storedValue)
 ```
 
+### Subject is not AnyObject
+
+```swift
+// subject is struct
+struct AnySubject {
+    let identifier: Int
+}
+
+// a appropriate property that can be cleaned
+var propertyOfSomeone: [Int: AssociatedObjects] = [:]
+
+// You can customize `associatedObjects`
+extension AnySubject: HasAssociatedObjects {
+    var associatedObjects: AssociatedObjects {
+        guard let associatedObjects = propertyOfSomeone[self.hashValue] else {
+            let associatedObjects = AssociatedObjects()
+            propertyOfSomeone[hashValue] = associatedObjects
+            return associatedObjects
+        }
+        return associatedObjects
+    }
+}
+
+extension AnySubject: Hashable {
+    var hashValue: Int {
+        return self.identifier
+    }
+}
+
+func ==(lhs: AnySubject, rhs: AnySubject) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
+```
+
 ## Installation
 
 ### CocoaPods

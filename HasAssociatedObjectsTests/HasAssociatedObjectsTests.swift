@@ -20,6 +20,7 @@ class HasAssociatedObjectsTests: XCTestCase {
     
     override func tearDown() {
         subject.associatedObjects.removeAll()
+        propertyOfSomeone.removeAll()
 
         super.tearDown()
     }
@@ -99,6 +100,17 @@ class HasAssociatedObjectsTests: XCTestCase {
         XCTAssertEqual("hello", subject.storedString)
     }
 
+    func testTargetIsNotAnyObject() {
+        let subject1 = AnySubject(identifier: 1)
+        let subject2 = AnySubject(identifier: 2)
+
+        subject1.associatedObjects.value = 1
+        subject2.associatedObjects.value = "A"
+
+        XCTAssertEqual(1, subject1.associatedObjects.value as? Int)
+        XCTAssertEqual("A", subject2.associatedObjects.value as? String)
+    }
+
 }
 
 class ExtendedSubject {
@@ -127,3 +139,29 @@ extension ExtendedSubject: HasAssociatedObjects {
     }
 }
 
+struct AnySubject {
+    let identifier: Int
+}
+
+var propertyOfSomeone: [Int: AssociatedObjects] = [:]
+
+extension AnySubject: HasAssociatedObjects {
+    var associatedObjects: AssociatedObjects {
+        guard let associatedObjects = propertyOfSomeone[self.hashValue] else {
+            let associatedObjects = AssociatedObjects()
+            propertyOfSomeone[hashValue] = associatedObjects
+            return associatedObjects
+        }
+        return associatedObjects
+    }
+}
+
+extension AnySubject: Hashable {
+    var hashValue: Int {
+        return self.identifier
+    }
+}
+
+func ==(lhs: AnySubject, rhs: AnySubject) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
