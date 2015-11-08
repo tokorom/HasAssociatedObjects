@@ -6,11 +6,11 @@
 
 import Foundation
 
-class AssociatedObjects: NSObject {
+public class AssociatedObjects: NSObject {
 
-    var dictionary: [String: Any] = [:]
+    public var dictionary: [String: Any] = [:]
 
-    var value: Any? {
+    public var value: Any? {
         get {
             return self.dictionary[""]
         }
@@ -19,7 +19,7 @@ class AssociatedObjects: NSObject {
         }
     }
 
-    subscript(key: String) -> Any? {
+    public subscript(key: String) -> Any? {
         get {
             return self.dictionary[key]
         }
@@ -28,19 +28,19 @@ class AssociatedObjects: NSObject {
         }
     }
 
-    func removeAll() {
+    public func removeAll() {
         self.dictionary.removeAll()
     }
 
 }
 
-protocol HasAssociatedObjects {
+public protocol HasAssociatedObjects {
     var associatedObjects: AssociatedObjects { get }
 }
 
-var AssociatedObjectsKey: UInt8 = 0
+private var AssociatedObjectsKey: UInt8 = 0
 
-extension HasAssociatedObjects where Self: AnyObject {
+public extension HasAssociatedObjects where Self: AnyObject {
     var associatedObjects: AssociatedObjects {
         guard let associatedObjects = objc_getAssociatedObject(self, &AssociatedObjectsKey) as? AssociatedObjects else {
             let associatedObjects = AssociatedObjects()
