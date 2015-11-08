@@ -2,6 +2,9 @@
 ==================
 
 [![Swift Version](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![License](https://img.shields.io/cocoapods/l/HasAssociatedObjects.svg?style=flat)](https://github.com/tokorom/HasAssociatedObjects/blob/master/LICENSE)
+[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/HasAssociatedObjects.svg?style=flat)](https://cocoapods.org/)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 We can add some stored objects to Swift extension
 
