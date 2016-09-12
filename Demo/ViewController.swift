@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         self.associatedObjects.value = "SUCCESS :)"
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     
         self.label?.text = self.associatedObjects.value as? String

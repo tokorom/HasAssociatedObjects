@@ -45,8 +45,8 @@ class HasAssociatedObjectsTests: XCTestCase {
         let key = "DICTIONARY"
 
         let dict: [String : AnyObject] = [
-            "key1": "value1",
-            "key2": "value2",
+            "key1": "value1" as AnyObject,
+            "key2": "value2" as AnyObject,
         ]
         subject.associatedObjects[key] = dict
 
