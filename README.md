@@ -1,7 +1,7 @@
 # HasAssociatedObjects
 ==================
 
-[![Swift Version](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift Version](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![License](https://img.shields.io/cocoapods/l/HasAssociatedObjects.svg?style=flat)](https://github.com/tokorom/HasAssociatedObjects/blob/master/LICENSE)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/HasAssociatedObjects.svg?style=flat)](https://cocoapods.org/)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -20,10 +20,10 @@ extension UIViewController: HasAssociatedObjects {
     // new stored property
     var storedString: String? {
         get {
-            return self.associatedObjects.value as? String
+            return associatedObjects.value as? String
         }
         set {
-            self.associatedObjects.value = newValue
+            associatedObjects.value = newValue
         }
     }
 
@@ -39,22 +39,22 @@ extension UIViewController: HasAssociatedObjects {
 
     var storedString: String? {
         get {
-            return self.associatedObjects["STRING"] as? String
+            return associatedObjects["STRING"] as? String
         }
         set {
-            self.associatedObjects["STRING"] = newValue ?? ""
+            associatedObjects["STRING"] = newValue ?? ""
         }
     }
 
     var storedInt: Int {
         get {
-            guard let value = self.associatedObjects["INT"] as? Int else {
+            guard let value = associatedObjects["INT"] as? Int else {
                 return 0 //< default value
             }
             return value
         }
         set {
-            self.associatedObjects["INT"] = newValue
+            associatedObjects["INT"] = newValue
         }
     }
 
@@ -87,7 +87,7 @@ var propertyOfSomeone: [Int: AssociatedObjects] = [:]
 // You can customize `associatedObjects`
 extension AnySubject: HasAssociatedObjects {
     var associatedObjects: AssociatedObjects {
-        guard let associatedObjects = propertyOfSomeone[self.hashValue] else {
+        guard let associatedObjects = propertyOfSomeone[hashValue] else {
             let associatedObjects = AssociatedObjects()
             propertyOfSomeone[hashValue] = associatedObjects
             return associatedObjects
@@ -98,12 +98,12 @@ extension AnySubject: HasAssociatedObjects {
 
 extension AnySubject: Hashable {
     var hashValue: Int {
-        return self.identifier
+        return identifier
     }
-}
 
-func ==(lhs: AnySubject, rhs: AnySubject) -> Bool {
-    return lhs.hashValue == rhs.hashValue
+    static func == (lhs: AnySubject, rhs: AnySubject) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
 }
 ```
 
