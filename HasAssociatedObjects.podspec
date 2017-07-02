@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "HasAssociatedObjects"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "We can add some stored objects to Swift extension"
 
   s.homepage         = "https://github.com/tokorom/HasAssociatedObjects"
@@ -8,8 +8,8 @@ Pod::Spec.new do |s|
   s.author           = { "tokorom" => "tokorom@gmail.com" }
   s.source           = { :git => "https://github.com/tokorom/HasAssociatedObjects.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '8.0'
-  s.requires_arc = true
+  s.ios.deployment_target = "8.0"
+  s.tvos.deployment_target = "9.0"
 
   s.source_files = 'HasAssociatedObjects/**/*.swift'
 end
