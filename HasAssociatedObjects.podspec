@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "HasAssociatedObjects"
-  s.version          = "2.0.0"
+  s.version          = "2.0.1"
   s.summary          = "We can add some stored objects to Swift extension"
 
   s.homepage         = "https://github.com/tokorom/HasAssociatedObjects"
